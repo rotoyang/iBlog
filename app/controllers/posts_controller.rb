@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :edit, :destroy]
+    before_action :is_author, only: [:edit, :destroy]
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
     def show
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
+        @post.user_id = current_user.id
         if @post.save
             flash[:notice] = "Post created successfullywas created successfully."
             # redirect_to post_path(@post)
@@ -54,6 +56,14 @@ class PostsController < ApplicationController
 
     def post_params
         params.require(:post).permit(:title, :desc)
+    end
+
+    def is_author
+        @post = Post.find(params[:id])
+        unless current_user.id == @post.user_id
+            flash[:notice] = "You are not the author of this post."
+            redirect_to posts_path
+        end
     end
 
 end
