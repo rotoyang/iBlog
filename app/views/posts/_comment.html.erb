@@ -5,7 +5,7 @@
         <div class="card-header">
           <h2 class="text-center mt-2">Comments</h2>
         </div>
-        <% @post.comments.each do |comment| %>
+        <% @post.comments.order("created_at desc").each do |comment| %>
           <% if comment.id? %>
             <div class="card-body">
               <div class="card-text text-start"><%= comment.username %>: <%= simple_format(comment.desc) %></div>

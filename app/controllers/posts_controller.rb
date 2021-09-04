@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
     def index
         # @posts = Post.all
-        @pagy, @posts = pagy(Post.all)
+        @pagy, @posts = pagy(Post.all.order(id: :desc))
     end
 
     def new
