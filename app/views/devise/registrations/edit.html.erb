@@ -45,11 +45,8 @@
     <div class="actions">
       <%= f.submit "Update", class: "btn btn-primary btn-sm mt-2" %>
     </div>
+    <p class="mt-4 bt-4">
+      <%= link_to "[ Back ]", :back %>
+    </p>
   <% end %>
-
-  <h1 class="text-center mt-4">Cancel my account</h1>
-  
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary btn-sm mt-2" %></p>
-
-  <%= link_to "[ Back ]", :back %>
 </div>
