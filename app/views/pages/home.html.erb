@@ -1,4 +1,15 @@
-<h1>Welcom to the iBlog</h1>
-
-<%= link_to 'Posts listing', posts_path %> |
-<%= link_to 'About page', about_path %>
+<div class="container" id="home-container">
+  <div class="p-5 mb-4 bg-light rounded-3" id="home-jumbotron">
+    <div class="container-fluid py-5 text-center text-white">
+      <h1 class="display-4 fw-bold">Your iBlog</h1>
+      <p>一袋米要扛幾樓....</p>
+      <hr class="my-4">
+      <% if current_user %>
+        <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-lg") %>
+      <% else %>
+        <%= link_to('Sign up', new_registration_path(:user), class: "btn btn-primary btn-lg") %>
+        <%= link_to('Log in', new_session_path(:user), class: "btn btn-primary btn-lg") %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!, only: [:new, :edit, :destroy]
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
     def show
     end
 
     def index
-        @posts = Post.all
+        # @posts = Post.all
+        @pagy, @posts = pagy(Post.all)
     end
 
     def new
