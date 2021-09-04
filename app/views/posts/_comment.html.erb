@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-10 mt-2">
+      <div class="card text-center shadow mb-5 bg-white rounded">
+        <div class="card-header">
+          <h2 class="text-center mt-2">Comments</h2>
+        </div>
+        <% @post.comments.each do |comment| %>
+          <% if comment.id? %>
+            <div class="card-body">
+              <div class="card-text text-start"><%= comment.username %>: <%= simple_format(comment.desc) %></div>
+              <small>Created <%= time_ago_in_words(comment.created_at) %> ago</small>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="card-footer text-muted fst-italic">
+          <%= form_with(model: [@post, @post.comments.build], class: "shadow p-3 mb-3 bg-gray rounded", local: true) do |f| %>
+            <div class="form-group row">
+              <%= f.label :username, class: "col-2 col-form-label" %><br/>
+              <div class="col-10">
+                <%= f.text_field :username, autocomplete: "username", class: "form-control shadow rounded", placeholder: "Your name." %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <%= f.label :desc, class: "col-2 col-form-label" %><br/>
+              <div class="col-10">
+                <%= f.text_area :desc, rows: 10, class: "form-control shadow rounded", placeholder: "Description of Comment." %>
+              </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+              <%= f.submit "Comment", class: "btn col-2 mt-4 btn-primary btn-md" %>
+            </div>
+          <% end %>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

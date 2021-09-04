@@ -3,6 +3,9 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
     def show
+        unless @post
+            @post = Post.find(params[:post_id])
+        end
     end
 
     def index
@@ -19,9 +22,8 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
-        # render plain: @post.inspect
         if @post.save
-            flash[:notice] = "Post was created successfully."
+            flash[:notice] = "Post created successfullywas created successfully."
             # redirect_to post_path(@post)
             redirect_to @post
         else
