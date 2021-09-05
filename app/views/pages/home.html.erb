@@ -7,8 +7,7 @@
       <% if current_user %>
         <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-lg") %>
       <% else %>
-        <%= link_to('Sign up', new_registration_path(:user), class: "btn btn-primary btn-lg") %>
-        <%= link_to('Log in', new_session_path(:user), class: "btn btn-primary btn-lg") %>
+        <%= link_to "Facebook Login", user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-primary btn-lg" %>
       <% end %>
     </div>
   </div>

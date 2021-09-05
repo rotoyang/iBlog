@@ -19,10 +19,8 @@
             <li><hr class="dropdown-divider"></li>
             <% if current_user %>
               <li><%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "dropdown-item") %></li>
-              <li><%= link_to('Edit User', edit_registration_path(:user), class: "dropdown-item") %></li>
             <% else %>
-              <li><%= link_to('Sign up', new_registration_path(:user), class: "dropdown-item") %></li>
-              <li><%= link_to('Log in', new_session_path(:user), class: "dropdown-item") %></li>
+              <li><%= link_to "Facebook Login", user_facebook_omniauth_authorize_path, class: "dropdown-item" %></li>
             <% end %>
           </ul>
         </li>
