@@ -1,0 +1,56 @@
+version: '3.4'
+
+volumes:
+  postgres_data: {}
+  postgres_data_backups: {}
+  letsencrypt: {}
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/postgres/Dockerfile
+    image: iblog_postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql:Z
+      - postgres_data_backups:/backups:z
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - "5432:5432"
+
+  ruby:
+    build:
+      context: .
+      network: host
+      dockerfile: ./compose/ruby/Dockerfile
+    image: iblog_ruby
+    expose:
+      - 3000
+    depends_on:
+      - postgres
+    env_file:
+      - ./.env
+    volumes:
+      - /temp/sockets:/app/tmp/sockets
+  
+  nginx:
+    build:
+      context: .
+      network: host
+      dockerfile: ./compose/nginx/Dockerfile
+      args:
+        - CERTBOT_EMAIL=rotoyang@gmail.com
+        - DOMAIN_LIST=iblog.rotoyang.com
+    image: iblog_nginx
+    depends_on:
+      - ruby
+    restart: always
+    volumes:
+      - /tmp/sockets:/app/tmp/sockets
+      - ./compose/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
