@@ -12,7 +12,7 @@ services:
       dockerfile: ./compose/postgres/Dockerfile
     image: iblog_postgres
     volumes:
-      - postgres_data:/var/lib/postgresql:Z
+      - postgres_data:/var/lib/postgresql/data:Z
       - postgres_data_backups:/backups:z
     env_file:
       - ./.env
