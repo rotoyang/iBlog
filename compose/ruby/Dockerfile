@@ -7,5 +7,8 @@ COPY Gemfile /iblog/Gemfile
 COPY Gemfile.lock /iblog/Gemfile.lock
 ENV RAILS_ENV production
 RUN bundle install
+COPY package.json /iblog/package.json
+COPY yarn.lock /iblog/yarn.lock
+RUN yarn install
 COPY . /iblog
 CMD rake db:migrate assets:precompile && puma -C config/puma.rb
