@@ -1,5 +1,5 @@
 FROM ruby:2.6.6
-RUN apt-get update && apt-get install -y build-essential libpq-dev nodejs vim postgis imagemagick
+RUN apt-get update && apt-get install -y build-essential libpq-dev nodejs yarn vim postgis imagemagick
 RUN mkdir /iblog
 WORKDIR /iblog
 RUN gem install bundler --version "2.2.26"
