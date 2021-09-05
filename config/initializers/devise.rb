@@ -275,7 +275,7 @@ Devise.setup do |config|
 
   # config.omniauth :facebook, "575898826873606", "86fe67e9e14fde994ce7298cd36fd9e0", :scope => 'public_profile,email', :info_fields => 'email,name', callback_url: "http://localhost:3000/users/auth/facebook/callback"
 
-  config.omniauth :facebook, "575898826873606", "86fe67e9e14fde994ce7298cd36fd9e0"
+  config.omniauth :facebook, "575898826873606", "86fe67e9e14fde994ce7298cd36fd9e0", scope: 'email', info_fields: 'email,name'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
