@@ -2,7 +2,7 @@ FROM ruby:2.5.6
 RUN apt-get update && apt-get install -y build-essential libpq-dev nodejs vim postgis imagemagick
 RUN mkdir /iblog
 WORKDIR /iblog
-RUN gem install --default bundler -v 2.2.26
+RUN gem install bundler --version "2.2.26"
 COPY Gemfile /iblog/Gemfile
 COPY Gemfile.lock /iblog/Gemfile.lock
 ENV RAILS_ENV production
