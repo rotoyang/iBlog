@@ -11,6 +11,6 @@ ENV RAILS_ENV production
 RUN bundle install
 COPY package.json /iblog/package.json
 COPY yarn.lock /iblog/yarn.lock
-CMD ["yarn", "install"]
+RUN yarn install
 COPY . /iblog
 CMD rake db:migrate assets:precompile && puma -C config/puma.rb
